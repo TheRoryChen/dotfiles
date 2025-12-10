@@ -1,0 +1,318 @@
+@define-color text            @fg;
+@define-color background-alt  @bg0;
+@define-color selected        @blue;
+@define-color hover           alpha(@selected, .4);
+@define-color urgent          @red;
+@define-color background      @bg0;
+* {
+  color:            @text;
+
+  all: unset;
+  font-size: 14px;
+  font-family: "JetBrainsMonoNerdFont Propo";
+  transition: 200ms;
+
+}
+
+/* Avoid 'annoying' backgroud */
+.blank-window {  
+  background: @transparent;  
+}
+  
+/* CONTROL CENTER ------------------------------------------------------------------------ */
+
+.control-center {
+  background: @background;
+  border-radius: 24px;
+  border: 1px solid @selected;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
+  margin: 18px;
+  padding: 12px;
+}
+
+/* Notifications  */
+.control-center .notification-row .notification-background,
+.control-center .notification-row .notification-background .notification.critical {
+  background-color: @background-alt;
+  border-radius: 16px;
+  margin: 4px 0px;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  color: @urgent;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 6px;
+  padding: 8px 6px 2px 2px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 3.4em;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: alpha(@selected, .6);
+  color: @text;
+  border-radius: 12px;
+  margin: 6px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @selected;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+
+ background-color: @selected;
+}
+
+/* Buttons */
+
+.control-center .notification-row .notification-background .close-button {
+  background: @bg0;
+  border-radius: 6px;
+  color: @text;
+  margin: 0px;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  background-color: @selected;
+}
+
+.control-center .notification-row .notification-background .close-button:active {
+  background-color: @selected;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 12px;
+}
+
+progressbar {
+  background-color: rgba(255,255,255,.1);
+}
+
+/* Notifications expanded-group */
+
+.notification-group {
+  margin: 2px 8px 2px 8px;
+
+}
+.notification-group-headers {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: @text;
+  letter-spacing: 2px;
+}
+
+.notification-group-icon {
+  color: @text;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: @bg0;
+  color: @text;
+  margin: 4px; 
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @hover;
+}  
+
+/* WIDGETS --------------------------------------------------------------------------- */
+
+  /* Notification clear button */
+.widget-title {
+  font-size: 1.2em;
+  margin: 6px;
+}
+
+.widget-title button {
+  background: @background-alt;
+  border-radius: 6px;
+  padding: 4px 16px;
+}
+
+.widget-title button:hover {
+  background-color: @hover;
+}
+
+.widget-title button:active {
+  background-color: @selected;
+}
+
+  /* Do not disturb */
+.widget-dnd {
+  margin: 6px;
+  font-size: 1.2rem;
+}
+
+.widget-dnd > switch {
+  background: @background-alt;
+  font-size: initial;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 2px;
+}
+
+.widget-dnd > switch:hover {
+  background: @hover;
+}
+
+.widget-dnd > switch:checked {
+  background: @selected;
+}
+
+.widget-dnd > switch:checked:hover {
+  background: @hover;
+}
+
+.widget-dnd > switch slider {
+  background: @text;
+  border-radius: 6px;
+}
+
+  /* Buttons menu */
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 6px 2px;
+  margin: 6px;
+  border-radius: 12px;
+  background: @background-alt;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 4px 10px;
+  padding: 6px 12px;
+  background: @bg0;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: @hover;
+}
+
+
+  /* Music player */
+/* Music player container */
+.widget-mpris {
+    background: transparent;                  /* solid background */
+    border-radius: 16px;
+    color: @text;
+    margin: 12px 6px;
+    padding: 0;
+    border: 1px solid alpha(@text, .08);
+}
+
+
+/* Card container */
+.widget-mpris-player {
+    position: relative;
+    border-radius: inherit;
+    padding: 0px;
+    border: 1px solid alpha(@text, .08);
+    overflow: hidden;
+    background: transparent;
+    z-index: 0;
+}
+
+/* FULL-CARD overlay (tints entire thumbnail) */
+.widget-mpris-player::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);  /* opacity strength */
+  border-radius: inherit;  
+  z-index: 0;
+}
+
+
+/* Translucent overlay on top of album art */
+.mpris-overlay {
+  background: alpha(@bg0, 0.6);  /* 0.5–0.9 = adjust opacity */
+  padding: 12px;
+  border-radius: inherit;
+  backdrop-filter: blur(16px);
+  -gtk-backdrop-filter: blur(16px);
+}
+
+/* Make the actual content sit above the overlay */
+.widget-mpris-player > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+/* Album art */
+.widget-mpris-album-art {
+	min-width: 64px;
+	min-height: 64px;
+	max-width: 64px; 
+	max-height: 64px;
+	border-radius: 12px;
+	margin-right: 10px;
+	background-size: cover;
+	background-position: center;
+}
+
+/* Text */
+.widget-mpris-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: @text;
+}
+
+.widget-mpris-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+
+/* Controls row */
+.widget-mpris-controls button {
+    all: unset;
+    min-width: 26px;
+    min-height: 26px;
+    border-radius: 999px;
+    text-align: center;
+    margin-right: 4px;
+    margin-top: 6px;
+    color: alpha(@text, .7);
+    background: alpha(@text, .04);
+    transition: all 150ms ease;
+}
+
+.widget-mpris-controls button:hover {
+    background: alpha(@text, .15);
+    color: @text;
+}
+
+/* Disabled buttons */
+.widget-mpris-controls button:disabled {
+    opacity: .3;
+    background: transparent;
+}
+
+/* Remove double backgrounds */
+.widget-mpris > box {
+    background: transparent;
+}
+
+/* Volume */
+.widget-volume {
+  background: @background-sec;
+  color: @background;
+  padding: 4px;
+  margin: 6px;
+  border-radius: 6px;
+}
+
+
